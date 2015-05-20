@@ -5,7 +5,7 @@ import sys
 #default
 SIZE = 160
 CHANNELS = 1
-RATE = 44100
+RATE = 8000
 
 class Audio(object):
 
@@ -33,7 +33,7 @@ class Audio(object):
         #print 's',size
         #return data
         res = ''
-        for i in range(0, self.rate / self.size * self.seconds):
+        for i in range(0, self.rate / self.size * self.seconds+4):
             size,data = self.input.read()
             #print size
             #print len(data)
@@ -46,9 +46,10 @@ class Audio(object):
     	#self.out.write(chunk)
         if type(chunk) == list:
             chunk = bytearray(chunk)
-            
+
         if self.inBytes:
             chunk = str(chunk)
+
         self.out.write(chunk)
 
 """
@@ -63,6 +64,7 @@ sound_out.setchannels(CHANNELS)
 sound_out.setrate(RATE)
 sound_out.setformat(alsaaudio.PCM_FORMAT_S16_LE)
 sound_out.setperiodsize(SIZE)
+32000
 """
 
 if __name__ == '__main__':
